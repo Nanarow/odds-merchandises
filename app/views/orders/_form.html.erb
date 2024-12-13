@@ -1,4 +1,4 @@
-<%= form_with(model: billing, class: "flex flex-col justify-center items-center gap-4 w-full px-4 sm:px-6", url: "/orders") do |form| %>
+<%= form_with(model: billing, class: "flex flex-col justify-center items-center gap-4 w-full", url: "/orders") do |form| %>
   <% if billing.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg w-full">
       <h2 class="font-semibold text-lg mb-2"><%= pluralize(billing.errors.count, "error") %> prohibited this billing from being saved:</h2>
