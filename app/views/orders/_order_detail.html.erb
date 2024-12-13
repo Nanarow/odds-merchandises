@@ -1,24 +1,30 @@
 <div class="w-full">
     <h1 class="font-bold text-4xl py-5">สรุปรายการ</h1>
     <div class="flex flex-col w-full">
-        <% @orders.each do |order| %>
-        <% product = @products.find { |p| p.id == order[:product_id] } %>
-        <div class="flex justify-between w-full mb-4 border-b">
-            <div class="flex w-full mb-4">
-                <% if product.image.attached? %> 
-                    <%= image_tag url_for(product.image), class: "w-16 h-16 object-cover rounded-md" %> 
-                <% else %>
-                    <%= image_tag "https://via.placeholder.com/48x48", class: "w-16 h-16 object-cover rounded-md" %> 
+        <% if @products_records.present? %>
+            <% @products.each do |product_id, quantity| %>
+                <% product = @products_records.find { |p| p.id == product_id.to_i } %>
+                <% if product %>
+                    <div class="flex justify-between w-full mb-4 border-b">
+                        <div class="flex w-full mb-4">
+                            <% if product.image.attached? %> 
+                                <%= image_tag url_for(product.image), class: "w-16 h-16 object-cover rounded-md" %> 
+                            <% else %>
+                                <%= image_tag "https://via.placeholder.com/48x48", class: "w-16 h-16 object-cover rounded-md" %> 
+                            <% end %>
+                            <div class="flex flex-col justify-between px-4">
+                                <p class="font-semibold text-lg"><%= product.name %></p>
+                                <p class="text-gray-700"><%= product.price * quantity.to_i %> บาท</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <p class="text-gray-500"><%= quantity %></p>
+                        </div>
+                    </div>
                 <% end %>
-                <div class="flex flex-col justify-between px-4">
-                    <p class="font-semibold text-lg"><%= product.name %></p>
-                    <p class="text-gray-700"><%= product.price * order[:quantity] %> บาท</p>
-                </div>
-            </div>
-            <div class="flex items-center">
-            <p class="text-gray-500"><%= order[:quantity] %></p>
-            </div>
-        </div>
+            <% end %>
+        <% else %>
+            <p class="text-center text-gray-500">ไม่มีสินค้าที่แสดง</p>
         <% end %>
     </div>
 </div>

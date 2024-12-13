@@ -1,15 +1,15 @@
 class OrdersController < ApplicationController
   def index
     @products = session[:products] || {}
-    puts @products
+    product_ids = @products.select { |_, quantity| quantity.to_i != 0 }.keys.map(&:to_i)
+    @products_records = Product.where(id: product_ids)
     @billing = Billing.new
     total_price = 0
     @products.each do |product_id, quantity|
-      p = Product.find(product_id)
-      total_price += p.price * quantity.to_i
+      product = @products_records.find { |p| p.id == product_id.to_i }
+      total_price += product.price * quantity.to_i if product
     end
     @billing.total_price = total_price
-
   end
 
   def show
