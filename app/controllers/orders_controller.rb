@@ -3,6 +3,12 @@ class OrdersController < ApplicationController
     @p = session[:products] || {}
     puts @p
     @billing = Billing.new
+    @products = Product.all
+    @orders = [
+      { quantity: 2, total_price: 500.0, product_id: 1 },
+      { quantity: 1, total_price: 150.0, product_id: 2 },
+      { quantity: 5, total_price: 1250.0, product_id: 3 }
+    ]
   end
 
   def show

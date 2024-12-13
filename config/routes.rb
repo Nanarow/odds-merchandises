@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  get "orders/index"
   get "admins/index"
   get "admins/show"
   get "products" => "products#index"
-  resource :orders
+  resources :orders, only: [:index]
   resources :billings
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
