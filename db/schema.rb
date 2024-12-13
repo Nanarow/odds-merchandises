@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_13_032341) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_13_062152) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,47 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_13_032341) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "billings", force: :cascade do |t|
+    t.string "fullname"
+    t.string "phone_number"
+    t.text "address"
+    t.float "total_price"
+    t.integer "promotion_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["promotion_id"], name: "index_billings_on_promotion_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "quantity"
+    t.float "total_price"
+    t.integer "billing_id"
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billing_id"], name: "index_orders_on_billing_id"
+    t.index ["product_id"], name: "index_orders_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.text "detail"
+    t.float "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.float "discount_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "billings", "promotions"
+  add_foreign_key "orders", "billings"
+  add_foreign_key "orders", "products"
 end
