@@ -1,14 +1,15 @@
 class OrdersController < ApplicationController
   def index
-    @p = session[:products] || {}
-    puts @p
+    @products = session[:products] || {}
+    puts @products
     @billing = Billing.new
-    @products = Product.all
-    @orders = [
-      { quantity: 2, total_price: 500.0, product_id: 1 },
-      { quantity: 1, total_price: 150.0, product_id: 2 },
-      { quantity: 5, total_price: 1250.0, product_id: 3 }
-    ]
+    total_price = 0
+    @products.each do |product_id, quantity|
+      p = Product.find(product_id)
+      total_price += p.price * quantity.to_i
+    end
+    @billing.total_price = total_price
+
   end
 
   def show
@@ -23,13 +24,21 @@ class OrdersController < ApplicationController
   def create
     @billing = Billing.new(billing_params)
 
+
+    products = session[:products] || {}
+
     respond_to do |format|
       if @billing.save
-        format.html { redirect_to @billing, notice: "Billing was successfully created." }
-        format.json { render :show, status: :created, location: @billing }
+        products.each do |product_id, quantity|
+          if quantity.to_i > 0
+            p = Product.find(product_id.to_i)
+            total = p.price * quantity.to_i
+            Order.create!(product_id: product_id.to_i, quantity: quantity.to_i, total_price: total, billing_id: @billing.id)
+          end
+        end
+        format.html { redirect_to orders_path, notice: "Billing was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @billing.errors, status: :unprocessable_entity }
+        format.html { redirect_to orders_path, alert: @billing.errors.full_messages }
       end
     end
   end

@@ -1,4 +1,16 @@
 <div>
+  <h1 class="font-bold text-4xl">Orders#index</h1>
+  <p>Find me in app/views/orders/index.html.erb</p>
+  
+  <% if alert %>
+    <%= alert %>
+  <% end %>
+  <% if notice %>
+    <%= notice %>
+  <% end %>
+  
+  <%= @products.inspect%>
+  <%= @billing.total_price %>
   <%= render "form", billing: @billing %>
   <%= @p.inspect%>
 </div>
