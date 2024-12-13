@@ -11,3 +11,11 @@
 }
 
 */
+
+.hidden-spinner::-webkit-inner-spin-button, .hidden-spinner::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.hidden-spinner {
+  -moz-appearance: textfield;
+}
