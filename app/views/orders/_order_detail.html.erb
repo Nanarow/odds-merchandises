@@ -1,27 +1,27 @@
-<div class="w-full">
-    <h1 class="font-bold text-4xl py-5">สรุปรายการ</h1>
-    <div class="flex flex-col w-full">
-        <% if @products_records.present? %>
-            <% @products.each do |product_id, quantity| %>
-                <% product = @products_records.find { |p| p.id == product_id.to_i } %>
-                <% if product %>
-                    <div class="flex justify-between w-full mb-4 border-b">
-                        <div class="flex w-full mb-4">
-                            <% if product.image.attached? %> 
-                                <%= image_tag url_for(product.image), class: "w-16 h-16 object-cover rounded-md" %> 
-                            <% else %>
-                                <%= image_tag "https://via.placeholder.com/48x48", class: "w-16 h-16 object-cover rounded-md" %> 
-                            <% end %>
-                            <div class="flex flex-col justify-between px-4">
-                                <p class="font-semibold text-lg"><%= product.name %></p>
-                                <p class="text-gray-700"><%= product.price * quantity.to_i %> บาท</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <p class="text-gray-500"><%= quantity %></p>
+<div>
+    <h1 class="font-bold text-4xl pb-4">สรุปรายการ</h1>
+    <div class="flex flex-col">
+        <% if @product_quantities.present? %>
+            <% @product_quantities.each do |pq| %>
+                <% product = pq[:product] %>
+                <% quantity = pq[:quantity] %>
+                <% total_price = pq[:total_price] %>
+                <div class="flex justify-between w-full mb-4 border-b">
+                    <div class="flex w-full mb-4">
+                        <% if product.image.attached? %> 
+                            <%= image_tag url_for(product.image), class: "w-16 h-16 object-cover rounded-md" %> 
+                        <% else %>
+                            <%= image_tag "https://via.placeholder.com/48x48", class: "w-16 h-16 object-cover rounded-md" %> 
+                        <% end %>
+                        <div class="flex flex-col justify-between px-4">
+                            <p class="font-semibold text-lg"><%= product.name %></p>
+                            <p class="text-gray-700"><%= number_with_precision(total_price, precision: 0, delimiter: ',') %> บาท</p>
                         </div>
                     </div>
-                <% end %>
+                    <div class="flex items-center">
+                        <p class="text-gray-500 px-4">x<%= quantity %></p>
+                    </div>
+                </div>
             <% end %>
         <% else %>
             <p class="text-center text-gray-500">ไม่มีสินค้าที่แสดง</p>
