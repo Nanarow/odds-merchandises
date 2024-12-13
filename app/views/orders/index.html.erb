@@ -1,5 +1,6 @@
-<div class="container sm:mx-auto mx-6">
+<div class="container sm:mx-auto p-6">
   <%= render "order_detail"%>
+
   <% if alert %>
     <%= alert %>
   <% end %>
@@ -7,10 +8,9 @@
     <%= notice %>
   <% end %>
 
-  <%= @products.inspect %>
-  <%= @billing.total_price %>
+
+  <%= render "total_price" %>
   <%= render "form", billing: @billing %>
-  <%= @p.inspect %>
 
   <!-- Conditionally render the popup if the success flash is set -->
   <% if flash[:success].present? %>

@@ -17,30 +17,19 @@
             <th id="address-header" class="py-3 px-6 text-left">ที่อยู่</th>
           </tr>
         </thead>
-        <tbody id="table-body" class="text-gray-600 text-sm font-light">
-          <!-- ตัวอย่างข้อมูลแถวที่ 1 -->
-          <tr id="row-1" class="border-b border-gray-300 hover:bg-gray-100">
-            <td id="bill-1" class="py-3 px-6 text-left">B001</td>
-            <td id="order-1" class="py-3 px-6 text-left">ORD1234</td>
-            <td id="quantity-1" class="py-3 px-6 text-center">3</td>
-            <td id="total-price-1" class="py-3 px-6 text-right">฿1,500</td>
-            <td id="created-at-1" class="py-3 px-6 text-center">2024-06-13</td>
-            <td id="customer-name-1" class="py-3 px-6 text-left">สมชาย ใจดี</td>
-            <td id="phone-1" class="py-3 px-6 text-center">081-123-4567</td>
-            <td id="address-1" class="py-3 px-6 text-left">123 หมู่ 1 ถนนสายหลัก กรุงเทพฯ</td>
-          </tr>
-          <!-- ตัวอย่างข้อมูลแถวที่ 2 -->
-          <tr id="row-2" class="border-b border-gray-300 hover:bg-gray-100">
-            <td id="bill-2" class="py-3 px-6 text-left">B002</td>
-            <td id="order-2" class="py-3 px-6 text-left">ORD5678</td>
-            <td id="quantity-2" class="py-3 px-6 text-center">1</td>
-            <td id="total-price-2" class="py-3 px-6 text-right">฿500</td>
-            <td id="created-at-2" class="py-3 px-6 text-center">2024-06-12</td>
-            <td id="customer-name-2" class="py-3 px-6 text-left">สมหญิง แสนดี</td>
-            <td id="phone-2" class="py-3 px-6 text-center">082-456-7890</td>
-            <td id="address-2" class="py-3 px-6 text-left">456 หมู่ 2 ตำบลสวยงาม นนทบุรี</td>
-          </tr>
-        </tbody>
+         <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td class="border px-4 py-2"><%= order.order_id %></td>
+        <td class="border px-4 py-2 text-center"><%= order.quantity %></td>
+        <td class="border px-4 py-2 text-right"><%= number_to_currency(order.total_price, unit: "฿") %></td>
+        <td class="border px-4 py-2"><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td class="border px-4 py-2"><%= order.fullname %></td>
+        <td class="border px-4 py-2 text-center"><%= order.phone_number %></td>
+        <td class="border px-4 py-2"><%= order.address %></td>
+      </tr>
+    <% end %>
+  </tbody>
       </table>
     </div>
   </div>
