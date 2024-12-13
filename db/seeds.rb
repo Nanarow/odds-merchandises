@@ -5,7 +5,13 @@ products_data = [
     name: "เสื้อ ODDS  (สีดำ)",
     price: 299,
     detail: "ส่วมใส่สบาย คูลๆๆ",
-    image_path: "db/images/เสื้อ.jpg"
+    image_path: "db/images/เสื้อดำ.jpg"
+  },
+  {
+    name: "เสื้อ ODDS  (สีขาว)",
+    price: 299,
+    detail: "ส่วมใส่สบาย คูลๆๆ",
+    image_path: "db/images/เสื้อขาว.jpg"
   },
   {
     name: "ถุงเท้า (สีเขียว)",
