@@ -5,19 +5,19 @@
     
     <div id="table-wrapper" class="overflow-x-auto">
       <table id="order-table" class="min-w-full bg-white border border-gray-300">
-        <thead id="table-head">
-          <tr id="table-header-row" class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-            <th id="bill-header" class="py-3 px-6 text-left">บิล</th>
-            <th id="order-header" class="py-3 px-6 text-left">ออเดอร์</th>
-            <th id="quantity-header" class="py-3 px-6 text-center">จำนวนสินค้า</th>
-            <th id="total-price-header" class="py-3 px-6 text-right">ราคารวม</th>
-            <th id="created-at-header" class="py-3 px-6 text-center">สร้างเมื่อ</th>
-            <th id="customer-name-header" class="py-3 px-6 text-left">ชื่อ-นามสกุล</th>
-            <th id="phone-header" class="py-3 px-6 text-center">โทร</th>
-            <th id="address-header" class="py-3 px-6 text-left">ที่อยู่</th>
-          </tr>
-        </thead>
-         <tbody>
+        
+    <thead>
+    <tr class="bg-gray-200">
+      <th class="border px-4 py-2">หมายเลขออเดอร์</th>
+      <th class="border px-4 py-2">จำนวนสินค้า</th>
+      <th class="border px-4 py-2">ราคารวท</th>
+      <th class="border px-4 py-2">Created At</th>
+      <th class="border px-4 py-2">ชื่อ - นามสกุล</th>
+      <th class="border px-4 py-2">หมายเลขโทรศัพท์</th>
+      <th class="border px-4 py-2">ที่อยู่</th>
+    </tr>
+  </thead>
+  <tbody>
     <% @orders.each do |order| %>
       <tr>
         <td class="border px-4 py-2"><%= order.order_id %></td>
