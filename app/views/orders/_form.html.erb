@@ -1,9 +1,8 @@
-<%= form_with(model: billing, class: "contents", url: "/orders") do |form| %>
+<%= form_with(model: billing, class: "flex flex-col justify-start items-start gap-4 w-full px-4 sm:px-6 lg:w-3/4 xl:w-1/2 mx-auto", url: "/orders") do |form| %>
   <% if billing.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(billing.errors.count, "error") %> prohibited this billing from being saved:</h2>
-
-      <ul>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg w-full">
+      <h2 class="font-semibold text-lg mb-2"><%= pluralize(billing.errors.count, "error") %> prohibited this billing from being saved:</h2>
+      <ul class="list-disc pl-5">
         <% billing.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -19,23 +18,38 @@
         <%= form.file_field :image, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
-    <%= form.label :fullname %>
-    <%= form.text_field :fullname, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="text-left text-black text-2xl font-semibold font-['Inter'] leading-[28.80px] w-full">
+    กรอกที่อยู่จัดส่ง
   </div>
 
-  <div class="my-5">
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  <div class="flex flex-col gap-4 w-full">
+    <div class="flex flex-col gap-2">
+      <label for="fullname" class="text-[#1e1e1e] text-base font-normal font-['Inter'] leading-snug">
+        ชื่อ - นามสกุล
+      </label>
+      <%= form.text_field :fullname, class: "px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] w-full flex-grow text-base sm:text-sm lg:text-base font-normal font-['Inter'] leading-none outline-none" %>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="phone_number" class="text-[#1e1e1e] text-base font-normal font-['Inter'] leading-snug">
+        โทรศัพท์
+      </label>
+      <%= form.text_field :phone_number, class: "px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] w-full flex-grow text-base sm:text-sm lg:text-base font-normal font-['Inter'] leading-none outline-none" %>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <label for="address" class="text-[#1e1e1e] text-base font-normal font-['Inter'] leading-snug">
+        ที่อยู่
+      </label>
+      <%= form.text_area :address, class: "px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] w-full flex-grow text-base sm:text-sm lg:text-base font-normal font-['Inter'] leading-snug outline-none" %>
+    </div>
   </div>
 
-  <div class="my-5">
-    <%= form.label :address %>
-    <%= form.text_area :address, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-    <%= form.hidden_field :total_price %>
+  <%= form.hidden_field :total_price %>
 
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+
+  <div class="w-full flex justify-center items-center gap-4 mt-4">
+    <%= link_to "กลับ", root_path, class: "grow shrink basis-0 h-[38px] px-4 py-2 rounded-full border border-[#eb221e] flex justify-center items-center gap-2.5 text-[#eb221e] text-base font-semibold font-['Inter'] leading-snug text-center" %>
+    <%= form.submit "สั่งสินค้า", class: "grow shrink basis-0 h-[38px] px-4 py-2 bg-[#0455ad] text-white rounded-full flex justify-center items-center gap-2.5 text-base font-semibold font-['Inter'] leading-snug cursor-pointer text-center" %>
   </div>
 <% end %>
