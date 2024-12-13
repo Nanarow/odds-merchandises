@@ -51,8 +51,6 @@ products_data.each do |product_data|
     price: product_data[:price],
     detail: product_data[:detail]
   )
-  
-  # แนบรูปภาพเฉพาะเมื่อยังไม่มีไฟล์แนบ
   unless product.image.attached?
     product.image.attach(
       io: File.open(Rails.root.join(product_data[:image_path])),
@@ -61,3 +59,42 @@ products_data.each do |product_data|
     )
   end
 end
+
+# db/seeds.rb
+
+# ตรวจสอบว่ามีข้อมูล Products และ Billings อยู่แล้ว
+if Product.count == 0
+  puts "Please seed products first."
+  exit
+end
+
+if Billing.count == 0
+  puts "Please seed billings first."
+  exit
+end
+
+# ตัวอย่าง: สร้าง Seed สำหรับ Orders
+orders_data = []
+
+# สร้าง Orders จำนวน 10 รายการ
+10.times do
+  product = Product.order("RANDOM()").first # เลือกสินค้าแบบสุ่ม
+  billing = Billing.order("RANDOM()").first # เลือก Billing แบบสุ่ม
+  quantity = rand(1..5) # กำหนดจำนวนแบบสุ่ม (1 ถึง 5)
+
+  total_price = product.price * quantity # คำนวณราคาทั้งหมด
+
+  orders_data << {
+    product_id: product.id,
+    billing_id: billing.id,
+    quantity: quantity,
+    total_price: total_price
+  }
+end
+
+# บันทึกข้อมูลลงฐานข้อมูล
+orders_data.each do |order_data|
+  Order.create!(order_data)
+end
+
+puts "Seeded #{orders_data.size} orders."
