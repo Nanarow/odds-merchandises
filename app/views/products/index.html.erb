@@ -1,6 +1,6 @@
 <%= render "header"%>
 <%= render "banner"%>
-<%= form_with url: pass_path, method: :post, class: "flex flex-col gap-2 mx-4 sm:mx-8 mt-4 ", id: "order-form" do %>
+<%= form_with url: pass_path, method: :post, class: "flex flex-col gap-2 mx-4 sm:mx-8 mt-4 pb-4", id: "order-form" do %>
   <% @products.each do |product| %>
     <div id="product-lists" class="flex border shadow rounded-lg overflow-hidden">
       <div>
