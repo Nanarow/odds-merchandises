@@ -1,0 +1,38 @@
+<h1>รายการสินค้า</h1>
+<form id="orderForm" action="/pass" method="get">
+  <table>
+    <thead>
+      <tr>
+        <th>สินค้า</th>
+        <th>ราคา</th>
+        <th>จำนวน</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= number_to_currency(product.price) %></td>
+          <td>
+            <div style="display: flex; align-items: center;">
+              <button type="button" onclick="updateQuantity('<%= product.id %>', -1)">-</button>
+              <input type="number" name="quantities[<%= product.id %>]" id="quantity_<%= product.id %>" value="0" min="0" style="width: 50px; text-align: center;" readonly>
+              <button type="button" onclick="updateQuantity('<%= product.id %>', 1)">+</button>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <button type="submit">ยืนยันการสั่งซื้อ</button>
+</form>
+
+<script>
+  // ฟังก์ชันสำหรับอัปเดตจำนวนสินค้า
+  function updateQuantity(productId, change) {
+    const input = document.getElementById(`quantity_${productId}`);
+    const currentValue = parseInt(input.value) || 0;
+    const newValue = Math.max(0, currentValue + change);
+    input.value = newValue;
+  }
+</script>
