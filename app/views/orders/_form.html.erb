@@ -14,8 +14,11 @@
   </div>
 
   <div class="my-5">
-        <%= form.label :slip, "อัพโหลดสลิป" %>
-        <%= form.file_field :image, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label "อัพโหลดสลิป" %>
+    <%= form.file_field :image, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <% if billing.errors[:image].any? %>
+      <p class="text-red-500 text-sm"><%= billing.errors[:image].first %></p>
+    <% end %>
   </div>
 
   <div class="text-left text-black text-2xl font-semibold font-['Inter'] leading-[28.80px] w-full">
@@ -28,6 +31,9 @@
         ชื่อ - นามสกุล
       </label>
       <%= form.text_field :fullname, class: "px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] w-full flex-grow text-base sm:text-sm lg:text-base font-normal font-['Inter'] leading-none outline-none" %>
+      <% if billing.errors[:fullname].any? %>
+        <p class="text-red-500 text-sm"><%= billing.errors[:fullname].first %></p>
+      <% end %>
     </div>
 
     <div class="flex flex-col gap-2">
@@ -35,6 +41,9 @@
         โทรศัพท์
       </label>
       <%= form.text_field :phone_number, class: "px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] w-full flex-grow text-base sm:text-sm lg:text-base font-normal font-['Inter'] leading-none outline-none" %>
+      <% if billing.errors[:phone_number].any? %>
+        <p class="text-red-500 text-sm"><%= billing.errors[:phone_number].first %></p>
+      <% end %>
     </div>
 
     <div class="flex flex-col gap-2">
@@ -42,6 +51,9 @@
         ที่อยู่
       </label>
       <%= form.text_area :address, class: "px-4 py-3 bg-white rounded-lg border border-[#d9d9d9] w-full flex-grow text-base sm:text-sm lg:text-base font-normal font-['Inter'] leading-snug outline-none" %>
+      <% if billing.errors[:address].any? %>
+        <p class="text-red-500 text-sm"><%= billing.errors[:address].first %></p>
+      <% end %>
     </div>
   </div>
 
