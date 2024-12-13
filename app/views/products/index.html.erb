@@ -1,5 +1,5 @@
 <h1>รายการสินค้า</h1>
-<form id="orderForm" action="/pass" method="get">
+<form id="orderForm" action="/pass" method="post">
   <table>
     <thead>
       <tr>
@@ -12,6 +12,7 @@
       <% @products.each do |product| %>
         <tr>
           <td><%= product.name %></td>
+          <!--<td><<%#= image_tag product.image %> %></td>-->
           <td><%= number_to_currency(product.price) %></td>
           <td>
             <div style="display: flex; align-items: center;">

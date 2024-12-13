@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get "orders/index"
   get "admins/index"
   get "admins/show"
-  resource :products
+  get "products" => "products#index"
   resource :orders
   resources :billings
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -18,5 +18,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "products#index"
 end
