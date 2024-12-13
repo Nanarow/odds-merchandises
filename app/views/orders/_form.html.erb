@@ -10,6 +10,14 @@
       </ul>
     </div>
   <% end %>
+  <div class="my-5">
+    <%= image_tag "mock_qr.png", alt: "QR Code", class: "my-3" %>
+  </div>
+
+  <div class="my-5">
+        <%= form.label :slip, "อัพโหลดสลิป" %>
+        <%= form.file_field :image, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
 
   <div class="my-5">
     <%= form.label :fullname %>

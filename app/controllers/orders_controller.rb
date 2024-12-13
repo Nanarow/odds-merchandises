@@ -56,6 +56,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def billing_params
-      params.expect(billing: [ :fullname, :phone_number, :address, :total_price, :promotion_id ])
+      params.expect(billing: [ :image, :fullname, :phone_number, :address, :total_price, :promotion_id ])
     end
 end
