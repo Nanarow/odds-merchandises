@@ -1,16 +1,16 @@
 <%= render "header"%>
 <%= render "banner"%>
-<%= form_with url: pass_path, method: :post, class: "flex flex-col gap-2 mx-8", id: "order-form" do %>
+<%= form_with url: pass_path, method: :post, class: "flex flex-col gap-2 mx-4 sm:mx-8 mt-4 ", id: "order-form" do %>
   <% @products.each do |product| %>
     <div id="product-lists" class="flex border shadow rounded-lg overflow-hidden">
-      <div class="size-1/4">
+      <div>
         <%= image_tag product.image, class: "object-contain size-24 sm:size-32 border bg-gray-100" %>
       </div>
 
-      <div class="flex flex-row justify-between w-full mx-2 items-center">
+      <div class="flex flex-row justify-between w-full mx-4 items-center">
         <div>
-          <p><%= product.name %></p>
-          <p><%= product.price %></p>
+          <h2 class="text-xl"><%= product.name %></h2>
+          <p><%= product.price.to_i %> บาท</p>
         </div>
 
         <div class="flex gap-2 items-center">
