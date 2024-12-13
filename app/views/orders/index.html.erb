@@ -6,9 +6,14 @@
   <% if notice %>
     <%= notice %>
   <% end %>
-  
-  <%= @products.inspect%>
+
+  <%= @products.inspect %>
   <%= @billing.total_price %>
   <%= render "form", billing: @billing %>
-  <%= @p.inspect%>
+  <%= @p.inspect %>
+
+  <!-- Conditionally render the popup if the success flash is set -->
+  <% if flash[:success].present? %>
+    <%= render 'popup' %>
+  <% end %>
 </div>

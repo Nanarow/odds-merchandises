@@ -23,8 +23,6 @@ class OrdersController < ApplicationController
   # POST /billings or /billings.json
   def create
     @billing = Billing.new(billing_params)
-
-
     products = session[:products] || {}
 
     respond_to do |format|
@@ -36,7 +34,9 @@ class OrdersController < ApplicationController
             Order.create!(product_id: product_id.to_i, quantity: quantity.to_i, total_price: total, billing_id: @billing.id)
           end
         end
-        format.html { redirect_to orders_path, notice: "Billing was successfully created." }
+
+        flash[:success] = "ชำระเงินสำเร็จ" # Success message
+        format.html { redirect_to orders_path } # Redirect after successful payment
       else
         format.html { redirect_to orders_path, alert: @billing.errors.full_messages }
       end
