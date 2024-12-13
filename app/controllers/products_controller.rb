@@ -1,12 +1,15 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
-  end
-
+  end      
   def pass
-    puts(params)
-    redirect_to orders_path(params)
+    permitted_params = params.permit(products: {})
+    puts permitted_params.to_h
+    session[:products] = permitted_params[:products].to_h
+    puts session[:products]
+    redirect_to billings_path
   end
+ 
   def show
     
   end
